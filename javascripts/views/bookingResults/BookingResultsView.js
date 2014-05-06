@@ -11,6 +11,7 @@ define([
 
     render: function(){
       var that = this;
+      this.get_url_contents();
       var roomTypes = new RoomTypesCollection();
       roomTypes.fetch({
         // dataType: 'jsonp',
@@ -24,6 +25,12 @@ define([
           console.log("error retrieving model");
         }
       })
+    },
+
+    get_url_contents: function() {
+      console.log("getting url contents");
+      var something = $.get("php/get_url_contents.php");
+      console.log(something);
     }
 
   });
