@@ -31,6 +31,8 @@ define([
       console.log("getting url contents");
       var something = $.get("php/get_url_contents.php");
       console.log(something.responseText);
+      var msg = $.ajax({type: "GET", url: "php/get_url_contents.php", async: false}).responseText;
+      console.log(msg);
     }
 
   });
