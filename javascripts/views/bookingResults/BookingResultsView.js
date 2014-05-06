@@ -12,13 +12,13 @@ define([
     render: function(){
       var that = this;
       var roomTypes = new RoomTypesCollection(this.get_json());
-      var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models})
+      var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models});
       this.$el.html(bookingResultsTemplate);
       // roomTypes.fetch({
       //   dataType: 'jsonp',
       //   success: function(roomTypes) {
       //     console.log("in success");
-      //     var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models})
+      //     var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models});
       //     that.$el.html(bookingResultsTemplate);
       //   },
       //   error: function (collection, resp){
