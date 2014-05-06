@@ -30,7 +30,7 @@ define([
     get_url_contents: function() {
       console.log("getting url contents");
       var something = $.get("php/get_url_contents.php");
-      console.log(something);
+      console.log(something.responseText);
     }
 
   });
