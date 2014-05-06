@@ -11,9 +11,10 @@ define([
 
     render: function(){
       var that = this;
-      var roomTypes = new RoomTypesCollection(this.get_json());
-      var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models});
-      this.$el.html(bookingResultsTemplate);
+      var rooms_json = this.get_json();
+      var roomTypes = new RoomTypesCollection(rooms_json);
+      var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
+      this.$el.html(renderedTemplate);
       // roomTypes.fetch({
       //   dataType: 'jsonp',
       //   success: function(roomTypes) {
