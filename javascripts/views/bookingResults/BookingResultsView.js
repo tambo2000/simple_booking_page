@@ -32,13 +32,15 @@ define([
     },
 
     get_json: function() {
-      console.log("getting url contents");
-      var msg = $.ajax({type: "GET", url: "php/get_url_contents.php", async: false}).responseText;
-      msg = msg.replace("<br/>", "");
-      console.log(msg);
-      msg = $.parseJSON(msg);
-      console.log(msg);
-      return msg
+      // this function is necessary because the JSON returned from the API endpoint is invalid. 
+      // It has a <br/> at the beginning.
+      var contents = $.ajax({type: "GET", 
+                             url: "php/get_url_contents.php", 
+                             async: false, 
+                             data: {'parameters': 'arrival_date=2014-05-11&departure_date=2014-05-13'}
+                     }).responseText;
+      contents = contents.replace("<br/>", "");
+      return $.parseJSON(contents);
     }
 
   });
