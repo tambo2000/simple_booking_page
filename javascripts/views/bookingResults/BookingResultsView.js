@@ -11,7 +11,7 @@ define([
 
     render: function(){
       var that = this;
-      this.get_url_contents();
+      this.get_json();
       var roomTypes = new RoomTypesCollection();
       roomTypes.fetch({
         // dataType: 'jsonp',
@@ -27,12 +27,16 @@ define([
       })
     },
 
-    get_url_contents: function() {
+    get_json: function() {
       console.log("getting url contents");
       var something = $.get("php/get_url_contents.php");
       console.log(something.responseText);
       var msg = $.ajax({type: "GET", url: "php/get_url_contents.php", async: false}).responseText;
+      msg = msg.replace("<br/>", "");
       console.log(msg);
+      msg = $.parseJSON(msg);
+      console.log(msg);
+      return msg
     }
 
   });
