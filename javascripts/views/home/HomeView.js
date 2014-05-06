@@ -3,7 +3,7 @@ define([
   'underscore',
   'backbone',
   'libs/datepicker/bootstrap-datepicker',
-  'text!templates/home/HomeTemplate.html',
+  'text!templates/home/homeTemplate.html',
   'views/bookingResults/BookingResultsView'
 ], function($, _, Backbone, Datepicker, homeTemplate, BookingResultsView){
 
