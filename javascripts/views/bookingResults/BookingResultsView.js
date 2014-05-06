@@ -13,6 +13,9 @@ define([
       var that = this;
       var rooms_json = this.get_json();
       var roomTypes = new RoomTypesCollection(rooms_json);
+      console.log(bookingResultsTemplate);
+      console.log(roomTypes);
+      console.log(roomTypes.models);
       var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
       this.$el.html(renderedTemplate);
       // roomTypes.fetch({
