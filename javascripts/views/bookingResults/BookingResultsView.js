@@ -9,6 +9,11 @@ define([
   var BookingResultsView = Backbone.View.extend({
     el: $("#booking-results"),
 
+    initialize: function(url) {
+      this.url = url;
+      console.log(this.url);
+    },
+
     render: function(){
       var that = this;
       var rooms_json = this.get_json();
@@ -37,7 +42,7 @@ define([
       var contents = $.ajax({type: "GET", 
                              url: "php/get_url_contents.php", 
                              async: false, 
-                             data: {'parameters': 'arrival_date=2014-05-11&departure_date=2014-05-13'}
+                             data: {'url': this.url}
                      }).responseText;
       contents = contents.replace("<br/>", "");
       return $.parseJSON(contents);

@@ -10,6 +10,27 @@ define([
   var HomeView = Backbone.View.extend({
     el: $("#page"),
 
+    events: {
+      "submit #dates-form": "updateBookingResults"
+    },
+
+    updateBookingResults: function(event) {
+      event.preventDefault();
+      url = this.buildUrl();
+      var bookingResultsView = new BookingResultsView(url);
+      bookingResultsView.render();
+
+      console.log(url);
+    },
+
+    buildUrl: function() {
+      form = $('#dates-form');
+      action = form.attr('action');
+      startDate = $('#dp-start').val();
+      endDate = $('#dp-end').val();
+      return action + '?json=true&arrival_date=' + startDate + '&departure_date=' + endDate;
+    },
+
     add_datepicker: function(){
       var nowTemp = new Date();
       var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
@@ -42,9 +63,6 @@ define([
       
       this.$el.html(homeTemplate);
       this.add_datepicker();
-
-      var bookingResultsView = new BookingResultsView();
-      bookingResultsView.render();
 
       // var sidebarView = new SidebarView();
       // sidebarView.render();
