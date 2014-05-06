@@ -18,7 +18,7 @@ define([
       //   return 'https://api.github.com/repos/thomasdavis/backbonetutorials/contributors';
       // },
 
-      url: 'https://reservations.frontdeskanywhere.net/F120322D/oboe2/ajax_get_booking_list.php?json=true&arrival_date=2014-05-07&departure_date=2014-05-09&callback=?',
+      url: 'php/get_url_contents.php',
 
       parse: function(response) {
         console.log(reponse);
