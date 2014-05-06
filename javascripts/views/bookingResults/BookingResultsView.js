@@ -16,7 +16,7 @@ define([
       console.log(bookingResultsTemplate);
       console.log(roomTypes);
       console.log(roomTypes.models);
-      var renderedTemplate = _.template( "bookingResultsTemplate", {roomTypes: roomTypes.models} );
+      var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
       this.$el.html(renderedTemplate);
       // roomTypes.fetch({
       //   dataType: 'jsonp',
