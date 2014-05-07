@@ -14,8 +14,8 @@ define([
     initialize: function(url, cart) {
       this.url = url;
       this.cart = cart;
-      // var rooms_json = this.get_mock_json();
-      var rooms_json = this.get_json();
+      var rooms_json = this.get_mock_json();
+      // var rooms_json = this.get_json();
       this.roomTypes = new RoomTypesCollection(rooms_json);
     },
 
@@ -99,7 +99,6 @@ define([
         roomType.checkInDate = that.getParameterByName('arrival_date');
         roomType.checkOutDate = that.getParameterByName('departure_date');
       });
-      console.log(contentsJSON);
       return contentsJSON;
     },
 

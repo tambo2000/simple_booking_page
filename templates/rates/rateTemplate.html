@@ -5,7 +5,7 @@
       <small>Price: $</small><strong><%= rate.price %></strong><br>
       <small>Quantity Available: </small><strong><%= rate.availabile %></strong><br>
     </div>
-    <div class="panel-footer">
+    <div class="panel-footer clearfix">
       <form class="form-inline add-room-form" id="<%= rate.rateNumber %>" action="#">
         <input type="hidden" class="name" name="name" value="<%= rate.rateName %>">
         <input type="hidden" class="price" name="price" value="<%= rate.price %>">

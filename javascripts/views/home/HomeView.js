@@ -20,21 +20,47 @@ define([
       event.preventDefault();
       var url = this.buildUrl();
       var cartModel = new CartModel({subtotal: 0, items: []});
-      var bookingResultsView = new BookingResultsView(url, cartModel);
-      bookingResultsView.render();
+      if (url) {
+        var bookingResultsView = new BookingResultsView(url, cartModel);
+        bookingResultsView.render();
+      } else {
+        $("#booking-results").empty();
+        $("#booking-results").html("<div class='alert alert-danger'>Invalid input. Please check your dates.</div>");
+      }
       var cartView = new CartView({model: cartModel});
       cartView.render();
     },
 
-    buildUrl: function() {
-      form = $('#dates-form');
-      action = form.attr('action');
-      startDate = $('#dp-start').val();
-      endDate = $('#dp-end').val();
-      return action + '?json=true&arrival_date=' + startDate + '&departure_date=' + endDate;
+    sanitizeDate: function(date) {
+      var dateRegex = /^(19\d\d|20\d\d)[- \/.](0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])$/
+      var match = dateRegex.exec(date);
+      if (match) {
+        return match[1] + "-" + match[2] + "-" + match[3];
+      }
+      return "";
     },
 
-    add_datepicker: function(){
+    validateDates: function(arrival, departure) {
+      var today = new Date();
+      var arrival_date = new Date(arrival);
+      var departure_date = new Date(departure);
+      return (((arrival_date - today) >= (-24*60*60*1000)) && (arrival_date < departure_date));
+    },
+
+    buildUrl: function() {
+      var form = $('#dates-form');
+      var action = form.attr('action');
+      var startDate = $('#dp-start').val();
+      startDate = this.sanitizeDate(startDate);
+      var endDate = $('#dp-end').val();
+      endDate = this.sanitizeDate(endDate);
+      if ((startDate && endDate) && (this.validateDates(startDate, endDate))) {
+        return action + '?json=true&arrival_date=' + startDate + '&departure_date=' + endDate;
+      }
+      return "";
+    },
+
+    addDatepicker: function(){
       var nowTemp = new Date();
       var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
        
@@ -66,13 +92,8 @@ define([
     },
 
     render: function(){
-      
       this.$el.html(homeTemplate);
-      this.add_datepicker();
-
-      // var sidebarView = new SidebarView();
-      // sidebarView.render();
- 
+      this.addDatepicker();
     }
 
   });
