@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Simple Booking Page</title>
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+  <title>Simple Hotel Room Booking Page</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/datepicker/datepicker.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/application.css">
   <!-- Load the script "js/main.js" as our entry point -->
   <script data-main="javascripts/main" src="javascripts/libs/require/require.js"></script>
 </head>
 <body>
-
-  <div class="container">
-    <h1>Simple Booking Page</h1>
-    <hr />
-    <div id="page">Loading...</div>
-    <div id="booking-results"></div>
-    <div id="sidebar"></div>
+  <div class="container-fluid">
+    <div class="col-md-10 col-md-offset-1"><h1>Simple Hotel Room Booking Page</h1></div>
+    <hr class="col-md-10 col-md-offset-1" />
+    <div id="page" class="col-md-10 col-md-offset-1">Loading...</div>
+    <hr class="col-md-10 col-md-offset-1" />
+    <div id="booking-results" class="col-md-8 col-md-offset-1"></div>
+    <div id="cart" class="col-md-2"></div>
   </div>
-
 </body>
 </html> 

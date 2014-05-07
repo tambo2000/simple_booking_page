@@ -11,16 +11,13 @@ define([
 
     initialize: function(url) {
       this.url = url;
-      console.log(this.url);
     },
 
     render: function(){
       var that = this;
-      var rooms_json = this.get_json();
+      // var rooms_json = this.get_json();
+      var rooms_json = this.get_mock_json();
       var roomTypes = new RoomTypesCollection(rooms_json);
-      console.log(bookingResultsTemplate);
-      console.log(roomTypes);
-      console.log(roomTypes.models);
       var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
       this.$el.html(renderedTemplate);
       // roomTypes.fetch({
@@ -45,6 +42,11 @@ define([
                              data: {'url': this.url}
                      }).responseText;
       contents = contents.replace("<br/>", "");
+      return $.parseJSON(contents);
+    },
+
+    get_mock_json: function() {
+      var contents = '[{"title":"1 queen size bed","roomType":1,"checkInDate":"2014-05-16","checkOutDate":"2014-05-19","availableRates":[{"price":100,"rateNumber":201,"rateName":"Really long rate name","availabile":8},{"price":102,"rateNumber":202,"rateName":"BBB","availabile":9},{"price":103,"rateNumber":203,"rateName":"CCC","availabile":1},{"price":200,"rateNumber":204,"rateName":"DDD","availabile":8},{"price":50,"rateNumber":205,"rateName":"EEE","availabile":1}]},{"title":"2 Queen Size","roomType":2,"checkInDate":"2014-05-16","checkOutDate":"2014-05-19","availableRates":[{"price":110,"rateNumber":201,"rateName":"Senior Discount","availabile":13}]},{"title":"King size","roomType":3,"checkInDate":"2014-05-16","checkOutDate":"2014-05-19","availableRates":[{"price":100,"rateNumber":201,"rateName":"Memorial Day Discount","availabile":5}]}]'
       return $.parseJSON(contents);
     }
 

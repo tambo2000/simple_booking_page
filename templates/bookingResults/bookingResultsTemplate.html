@@ -1,5 +1,37 @@
-booking results go here
 <% _.each(roomTypes, function(roomType) { %>
-  <%= roomType.get('title') %>
+  <div class="panel panel-default">
+    <div class="panel-heading titlize"><h4>Room Type: <%= roomType.get('title') %></h4></div>
+    <div class="panel-body">
+      <br>
+      <% rates = roomType.get('availableRates') %>
+      <% for (var i = 0; i < rates.length; i++ ) { %>
+        <% if ((i % 4) === 0) { %>
+          <div class="row">
+        <% } %>
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading titlize">Rate Name: <%= rates[i].rateName %></div>
+            <div class="panel-body">
+              Price: $<%= rates[i].price %><br>
+              Quantity Available: <%= rates[i].availabile %><br>
+            </div>
+            <div class="panel-footer">
+              <form class="form-inline">
+                <select class="form-control"> 
+                  <% for (var j=1; j<=rates[i].availabile; j++) { %>
+                    <option><%= j %></option>
+                  <% } %>
+                </select>
+                <div class='btn btn-default'>Add</div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <% if (((i+1) % 4) === 0 || i === rates.length-1) { %>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+  </div>
 
 <% }); %>
