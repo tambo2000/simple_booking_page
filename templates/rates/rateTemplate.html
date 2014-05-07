@@ -1,19 +1,20 @@
 <div class="col-md-3 col-sm-3 col-xs-6">
   <div class="panel panel-default">
-    <div class="panel-heading titlize">Rate Name: <%= rate.rateName %></div>
+    <div class="panel-heading titlize"><small>Rate Name: </small><strong><%= rate.rateName %></strong></div>
     <div class="panel-body">
-      Price: $<%= rate.price %><br>
-      Quantity Available: <%= rate.availabile %><br>
+      <small>Price: $</small><strong><%= rate.price %></strong><br>
+      <small>Quantity Available: </small><strong><%= rate.availabile %></strong><br>
     </div>
     <div class="panel-footer">
       <form class="form-inline add-room-form" id="<%= rate.rateNumber %>" action="#">
         <input type="hidden" class="price" name="price" value="<%= rate.price %>">
+        <input type="hidden" class="roomType" name="roomType" value="<%= roomtype %>">
         <select class="form-control quantity" name="quantity"> 
           <% for (var j=1; j<=rate.availabile; j++) { %>
             <option><%= j %></option>
           <% } %>
         </select>
-        <button type="submit" class='btn btn-default add-room-btn'>Add</button>
+        <button type="submit" class='btn btn-default add-room-btn pull-right'>Add</button>
       </form>
     </div>
   </div>

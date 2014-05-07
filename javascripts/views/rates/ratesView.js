@@ -14,11 +14,10 @@ define([
 
     render: function(){
       var that = this;
-      console.log(this.rates);
+      var selector = ".rates#" + that.roomtype;
+      $(selector).empty();
       _.each(this.rates, function(rate, index) {
-        var selector = ".rates#" + that.roomtype;
-        console.log(selector);
-        var renderedTemplate = _.template( rateTemplate, { rate: rate } );
+        var renderedTemplate = _.template( rateTemplate, { rate: rate, roomtype: that.roomtype } );
         $(selector).append(renderedTemplate);
         if (index % 4 === 3) {
           $(selector).append("<div class='col-md-12'><hr></div>");

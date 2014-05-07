@@ -25,11 +25,10 @@ define([
 
     render: function(){
       var that = this;
+      this.$el.empty();
       this.roomTypes.each(function(roomType) {
         var renderedTemplate = _.template( bookingResultsTemplate, {roomType: roomType} );
         that.$el.append(renderedTemplate);
-        console.log(roomType.get('availableRates'));
-        console.log(roomType.get('roomType'));
         var ratesView = new RatesView(roomType.get('availableRates'), roomType.get('roomType'));
         ratesView.render();
       });
@@ -43,6 +42,16 @@ define([
       this.cart.set({subtotal: subtotal + (price * quantity)});
       var cartView = new CartView({model: this.cart});
       cartView.render();
+
+      var roomType = $(event.currentTarget).children('.roomType').val();
+      var room = _.find(this.roomTypes.models, function(model) { return model.get('roomType') == roomType; });
+      console.log( room );
+      var rateNumber = $(event.currentTarget).attr('id');
+      var rate = _.find(room.get('availableRates'), function(model) { return model.rateNumber == rateNumber; });
+      console.log(rate);
+      var availability = rate.availabile;
+      rate.availabile = availability - quantity;
+      this.render();
     },
 
     get_json: function() {
