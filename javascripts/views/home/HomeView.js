@@ -19,7 +19,7 @@ define([
     updateBookingResults: function(event) {
       event.preventDefault();
       var url = this.buildUrl();
-      var cartModel = new CartModel({subtotal: 0, items: ['my', 'too']});
+      var cartModel = new CartModel({subtotal: 0, items: []});
       var bookingResultsView = new BookingResultsView(url, cartModel);
       bookingResultsView.render();
       var cartView = new CartView({model: cartModel});

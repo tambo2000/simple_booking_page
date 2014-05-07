@@ -7,11 +7,15 @@ body, html, .container-fluid {
 }
 
 .glyphicon.bigger {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 #booking-results {
-  max-height: 70%;
+  height: 70%;
+}
+
+.scroll-window {
+  height: 100%;
   overflow: scroll;
 }
 
