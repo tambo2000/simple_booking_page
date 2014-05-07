@@ -23,12 +23,13 @@ define([
       if (url) {
         var bookingResultsView = new BookingResultsView(url, cartModel);
         bookingResultsView.render();
+        var cartView = new CartView({model: cartModel});
+        cartView.render();
       } else {
+        $("#cart").empty();
         $("#booking-results").empty();
         $("#booking-results").html("<div class='alert alert-danger'>Invalid input. Please check your dates.</div>");
       }
-      var cartView = new CartView({model: cartModel});
-      cartView.render();
     },
 
     sanitizeDate: function(date) {
@@ -61,6 +62,7 @@ define([
     },
 
     addDatepicker: function(){
+      // I did not write most of this datepicker code. Only modified it for this app.
       var nowTemp = new Date();
       var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
        
