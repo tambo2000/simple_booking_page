@@ -9,8 +9,7 @@ define([
     el: $("#cart"),
 
     render: function(){
-
-      var renderedTemplate = _.template( cartTemplate );
+      var renderedTemplate = _.template( cartTemplate, { cart: this.model } );
       this.$el.html(renderedTemplate);
       
     }

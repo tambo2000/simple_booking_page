@@ -3,34 +3,46 @@ define([
   'underscore',
   'backbone',
   'text!templates/bookingResults/bookingResultsTemplate.html',
-  'collections/roomTypes/RoomTypesCollection'
-], function($, _, Backbone, bookingResultsTemplate, RoomTypesCollection){
+  'collections/roomTypes/RoomTypesCollection',
+  '../cart/CartView',
+  '../rates/RatesView'
+], function($, _, Backbone, bookingResultsTemplate, RoomTypesCollection, CartView, RatesView){
 
   var BookingResultsView = Backbone.View.extend({
     el: $("#booking-results"),
 
-    initialize: function(url) {
+    initialize: function(url, cart) {
       this.url = url;
+      this.cart = cart;
+      var rooms_json = this.get_mock_json();
+      // var rooms_json = this.get_json();
+      this.roomTypes = new RoomTypesCollection(rooms_json);
+    },
+
+    events: {
+      "submit .add-room-form": "addToCart"
     },
 
     render: function(){
       var that = this;
-      var rooms_json = this.get_json();
-      // var rooms_json = this.get_mock_json();
-      var roomTypes = new RoomTypesCollection(rooms_json);
-      var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
-      this.$el.html(renderedTemplate);
-      // roomTypes.fetch({
-      //   dataType: 'jsonp',
-      //   success: function(roomTypes) {
-      //     console.log("in success");
-      //     var renderedTemplate = _.template(bookingResultsTemplate, {roomTypes: roomTypes.models});
-      //     that.$el.html(bookingResultsTemplate);
-      //   },
-      //   error: function (collection, resp){
-      //     console.log("error retrieving model");
-      //   }
-      // })
+      this.roomTypes.each(function(roomType) {
+        var renderedTemplate = _.template( bookingResultsTemplate, {roomType: roomType} );
+        that.$el.append(renderedTemplate);
+        console.log(roomType.get('availableRates'));
+        console.log(roomType.get('roomType'));
+        var ratesView = new RatesView(roomType.get('availableRates'), roomType.get('roomType'));
+        ratesView.render();
+      });
+    },
+
+    addToCart: function(event) {
+      event.preventDefault();
+      var subtotal = this.cart.get('subtotal');
+      var price = $(event.currentTarget).children('.price').val();
+      var quantity = $(event.currentTarget).children('.quantity').val();
+      this.cart.set({subtotal: subtotal + (price * quantity)});
+      var cartView = new CartView({model: this.cart});
+      cartView.render();
     },
 
     get_json: function() {

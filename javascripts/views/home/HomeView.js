@@ -5,22 +5,24 @@ define([
   'libs/datepicker/bootstrap-datepicker',
   'text!templates/home/homeTemplate.html',
   'views/bookingResults/BookingResultsView',
-  'views/cart/CartView'
-], function($, _, Backbone, Datepicker, homeTemplate, BookingResultsView, CartView){
+  'views/cart/CartView',
+  '../../models/cart/CartModel'
+], function($, _, Backbone, Datepicker, homeTemplate, BookingResultsView, CartView, CartModel){
 
   var HomeView = Backbone.View.extend({
     el: $("#page"),
 
     events: {
-      "submit #dates-form": "updateBookingResults"
+      "submit #dates-form": "updateBookingResults",
     },
 
     updateBookingResults: function(event) {
       event.preventDefault();
-      url = this.buildUrl();
-      var bookingResultsView = new BookingResultsView(url);
+      var url = this.buildUrl();
+      var cartModel = new CartModel({subtotal: 0, items: ['my', 'too']});
+      var bookingResultsView = new BookingResultsView(url, cartModel);
       bookingResultsView.render();
-      var cartView = new CartView();
+      var cartView = new CartView({model: cartModel});
       cartView.render();
     },
 
@@ -66,7 +68,7 @@ define([
     render: function(){
       
       this.$el.html(homeTemplate);
-      // this.add_datepicker();
+      this.add_datepicker();
 
       // var sidebarView = new SidebarView();
       // sidebarView.render();
