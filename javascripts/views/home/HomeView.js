@@ -66,7 +66,7 @@ define([
     render: function(){
       
       this.$el.html(homeTemplate);
-      this.add_datepicker();
+      // this.add_datepicker();
 
       // var sidebarView = new SidebarView();
       // sidebarView.render();

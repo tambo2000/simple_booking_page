@@ -15,8 +15,8 @@ define([
 
     render: function(){
       var that = this;
-      // var rooms_json = this.get_json();
-      var rooms_json = this.get_mock_json();
+      var rooms_json = this.get_json();
+      // var rooms_json = this.get_mock_json();
       var roomTypes = new RoomTypesCollection(rooms_json);
       var renderedTemplate = _.template( bookingResultsTemplate, {roomTypes: roomTypes.models} );
       this.$el.html(renderedTemplate);
