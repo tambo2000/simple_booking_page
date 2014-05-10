@@ -14,8 +14,8 @@ define([
     initialize: function(url, cart) {
       this.url = url;
       this.cart = cart;
-      // var rooms_json = this.get_mock_json();
-      var rooms_json = this.get_json();
+      var rooms_json = this.get_mock_json();
+      // var rooms_json = this.get_json();
       this.roomTypes = new RoomTypesCollection(rooms_json);
     },
 
@@ -26,6 +26,7 @@ define([
     render: function(){
       var that = this;
       this.$el.empty();
+      this.$el.css("border-style", "solid");
       this.roomTypes.each(function(roomType) {
         var renderedTemplate = _.template( bookingResultsTemplate, {roomType: roomType} );
         that.$el.append(renderedTemplate);

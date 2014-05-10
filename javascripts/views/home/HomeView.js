@@ -28,6 +28,7 @@ define([
       } else {
         $("#cart").empty();
         $("#booking-results").empty();
+        $("#booking-results").css("border-style", "none");
         $("#booking-results").html("<div class='alert alert-danger'>Invalid input. Please check your dates.</div>");
       }
     },

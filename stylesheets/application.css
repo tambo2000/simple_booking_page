@@ -11,7 +11,9 @@ body, html, .container-fluid {
 }
 
 #booking-results {
-  height: 70%;
+  border-style: none;
+  border-radius: 4px;
+  border-color: #ddd;
 }
 
 .scroll-window {
