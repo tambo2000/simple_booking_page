@@ -66,7 +66,8 @@ define([
       var availability = rate.availabile;
       var quantity = form.children('.quantity').val();
       rate.availabile = availability - quantity;
-      this.render();
+      var ratesView = new RatesView(room.get('availableRates'), room.get('roomType'));
+      ratesView.render();
     },
 
     get_number_of_nights: function() {

@@ -46,7 +46,7 @@ define([
       var arrival_date = new Date(arrival);
       var departure_date = new Date(departure);
       var offset = today.getTimezoneOffset();
-      // the first value represents one day in miiliseconds, the second represents the timezone offset
+      // the first value represents one day in miiliseconds, the second represents the timezone offset in milliseconds
       return (((arrival_date - today) >= ((-24*60*60*1000) + (-offset*60*1000))) && (arrival_date < departure_date));
     },
 
